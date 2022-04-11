@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -59,6 +61,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    // Compose
     // Integration with activities
     implementation 'androidx.activity:activity-compose:1.4.0'
     // Compose Material Design
@@ -71,4 +74,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
+
+    // DI
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
 }
