@@ -1,7 +1,9 @@
 package com.example.aurora.utils
 
 class AuroraNativeBridge {
-    external fun stringFromJNI(): String
+    external fun startAudio()
+
+    external fun stopAudio()
 
     companion object {
         init {
