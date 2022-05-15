@@ -25,6 +25,11 @@ class AuroraViewModel @Inject constructor(
 
         _uiState.value = _uiState.value.copy(isPlaying = !isPlaying)
     }
+
+    fun setTempo(tempo: Int) {
+        _uiState.value = _uiState.value.copy(tempo = tempo)
+        auroraNativeBridge.setTempo(tempo)
+    }
 }
 
-data class AuroraState(val isPlaying: Boolean)
+data class AuroraState(val isPlaying: Boolean, val tempo: Int = 60)

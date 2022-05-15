@@ -21,3 +21,8 @@ Java_com_example_aurora_utils_AuroraNativeBridge_stopAudio(JNIEnv *env, jobject 
     LOGI("stopAudio");
     engine.stopAudio();
 }
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_aurora_utils_AuroraNativeBridge_setTempo(JNIEnv *env, jobject thiz, jint tempo) {
+    engine.setTempo(tempo);
+}

@@ -2,4 +2,5 @@
     <string name="app_name">aurora</string>
     <string name="action_play">Play</string>
     <string name="action_pause">Pause</string>
+    <string name="label_tempo">Tempo: %1$d BPM</string>
 </resources>

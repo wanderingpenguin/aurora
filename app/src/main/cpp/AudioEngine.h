@@ -6,7 +6,7 @@
 #define AURORA_AUDIOENGINE_H
 
 #include <oboe/Oboe.h>
-#include "Oscillator.h"
+#include "Metronome.h"
 
 class AudioEngine
         : public oboe::AudioStreamDataCallback,
@@ -16,6 +16,8 @@ public:
 
     void stopAudio();
 
+    void setTempo(int tempo);
+
     oboe::DataCallbackResult
     onAudioReady(oboe::AudioStream *audioStream, void *audioData, int32_t numFrames) override;
 
@@ -23,7 +25,7 @@ public:
 
 private:
     std::shared_ptr<oboe::AudioStream> mStream;
-    Oscillator mOscillator;
+    Metronome mMetronome;
 };
 
 

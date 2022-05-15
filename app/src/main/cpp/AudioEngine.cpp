@@ -3,6 +3,7 @@
 //
 
 #include "AudioEngine.h"
+#include "Metronome.h"
 #include <oboe/Oboe.h>
 #include <android/log.h>
 
@@ -29,9 +30,14 @@ void AudioEngine::startAudio() {
         LOGE("Error starting audio stream!");
         return;
     }
+
+    mMetronome.setSampleRate(mStream->getSampleRate());
+    mMetronome.start();
 }
 
 void AudioEngine::stopAudio() {
+    mMetronome.stop();
+
     if (mStream) {
         mStream->stop();
         mStream->close();
@@ -42,10 +48,14 @@ void AudioEngine::stopAudio() {
 oboe::DataCallbackResult
 AudioEngine::onAudioReady(oboe::AudioStream *audioStream, void *audioData, int32_t numFrames) {
     auto buffer = static_cast<float *>(audioData);
-    mOscillator.renderAudio(buffer, numFrames);
+    mMetronome.render(buffer, numFrames);
     return oboe::DataCallbackResult::Continue;
 }
 
 void AudioEngine::onErrorAfterClose(oboe::AudioStream *stream, oboe::Result result) {
     AudioStreamErrorCallback::onErrorAfterClose(stream, result);
+}
+
+void AudioEngine::setTempo(int tempo) {
+    mMetronome.setTempo(tempo);
 }

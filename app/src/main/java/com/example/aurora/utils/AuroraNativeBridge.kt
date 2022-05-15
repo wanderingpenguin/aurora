@@ -5,6 +5,8 @@ class AuroraNativeBridge {
 
     external fun stopAudio()
 
+    external fun setTempo(tempo: Int)
+
     companion object {
         init {
             System.loadLibrary("aurora")
