@@ -14,33 +14,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.aurora.R
+import com.example.aurora.ui.theme.AuroraTheme
 
 @Composable
 fun AuroraApp() {
-    val auroraViewModel: AuroraViewModel = viewModel()
-    val uiState = auroraViewModel.uiState.collectAsState()
+    AuroraTheme {
+        val auroraViewModel: AuroraViewModel = viewModel()
+        val uiState = auroraViewModel.uiState.collectAsState()
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Button(onClick = { auroraViewModel.toggleIsPlaying() }) {
-            Text(
-                text = if (uiState.value.isPlaying) stringResource(id = R.string.action_pause)
-                else stringResource(id = R.string.action_play)
-            )
-        }
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(onClick = { auroraViewModel.toggleIsPlaying() }) {
+                Text(
+                    text = if (uiState.value.isPlaying) stringResource(id = R.string.action_pause)
+                    else stringResource(id = R.string.action_play)
+                )
+            }
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = stringResource(id = R.string.label_tempo, uiState.value.tempo))
-            Slider(
-                value = uiState.value.tempo.toFloat(),
-                onValueChange = { tempo -> auroraViewModel.setTempo(tempo.toInt()) },
-                steps = 120,
-                valueRange = 60f..180f,
-                modifier = Modifier.weight(1f)
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = stringResource(id = R.string.label_tempo, uiState.value.tempo))
+                Slider(
+                    value = uiState.value.tempo.toFloat(),
+                    onValueChange = { tempo -> auroraViewModel.setTempo(tempo.toInt()) },
+                    steps = 120,
+                    valueRange = 60f..180f,
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
     }
 }
